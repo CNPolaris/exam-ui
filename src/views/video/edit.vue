@@ -17,7 +17,7 @@
       <el-form-item label="封面" prop="cover" required>
         <el-upload
           class="avatar-upload"
-          action="/api/video/upload/cover"
+          action="/api/image/upload"
           :show-file-list="false"
           :headers="headers"
           :on-success="handleImageSuccess"

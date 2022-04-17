@@ -38,7 +38,7 @@
       >
         <el-upload
           class="avatar-uploader"
-          action="/api/user/uploadImg"
+          action="/api/image/upload"
           :show-file-list="false"
           :headers="headers"
           :on-success="handleAvatarSuccess"

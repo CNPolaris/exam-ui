@@ -173,7 +173,7 @@ export function uploadImg(file) {
 
 export function uploadAvatar(url) {
   return request({
-    url: '/user/uploadAvatar',
+    url: '/user/avatar/save',
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
