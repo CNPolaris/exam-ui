@@ -46,10 +46,6 @@
           <img v-if="tempAvatar" :src="tempAvatar" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
-        <span slot="footer" class="dialog-footer" style="width: 80%">
-          <el-button type="primary" @click="handleUpload">确 定</el-button>
-          <el-button @click="handleClose = false">取 消</el-button>
-        </span>
       </el-dialog>
     </div>
   </el-card>
@@ -102,7 +98,28 @@ export default {
     },
     handleAvatarSuccess(res, file) {
       const { response } = file
-      this.tempAvatar = response.data
+      if (response.code === 2000) {
+        this.userInfo.avatar = response.data
+        uploadAvatar(response.data).then(re => {
+          if (re.code === 2000) {
+            this.$notify({
+              title: '成功',
+              message: re.message,
+              type: 'success',
+              duration: 2000
+            })
+            this.getInfo()
+          }
+        })
+        this.uploadDialogVisible = false
+      } else {
+        this.$notify({
+          title: '失败',
+          message: '上传失败',
+          type: 'error',
+          duration: 2000
+        })
+      }
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg'
