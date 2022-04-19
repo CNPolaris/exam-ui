@@ -103,32 +103,12 @@ export const asyncRoutes = [
     children: [
       {
         path: '/dashboard/admin',
-        component: () => import('@/views/dashboard/admin/index'),
+        component: () => import('@/views/dashboard/index'),
         name: 'AdminDash',
         meta: {
           title: '首页',
           affix: true,
           roles: ['admin']
-        }
-      }
-    ]
-  },
-  {
-    path: '/',
-    component: Layout,
-    redirect: '/dashboard/teacher',
-    meta: {
-      icon: 'dashboard',
-      roles: ['teacher'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: '/dashboard/teacher',
-        component: () => import('@/views/dashboard/teacher/index'),
-        name: 'TeacherDash',
-        meta: {
-          title: '首页',
-          roles: ['teacher']
         }
       }
     ]
@@ -200,7 +180,7 @@ export const asyncRoutes = [
     meta: {
       title: '用户管理',
       icon: 'user',
-      roles: ['admin', 'teacher']
+      roles: ['admin']
     },
     children: [
       {
@@ -209,7 +189,7 @@ export const asyncRoutes = [
         name: 'StudentList',
         meta: {
           title: '学生列表',
-          roles: ['admin', 'teacher']
+          roles: ['admin']
         }
       },
       {

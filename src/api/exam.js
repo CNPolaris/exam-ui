@@ -69,7 +69,7 @@ export function selectExamPaper(id) {
 
 export function paperAnswerList(query) {
   return request({
-    url: '/exam/answer/judge/list',
+    url: '/exam/answer/record/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },

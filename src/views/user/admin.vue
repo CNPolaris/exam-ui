@@ -53,12 +53,6 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="年级" width="140">
-        <template slot-scope="{row}">
-          <span>{{ row.userLevel }}</span>
-        </template>
-      </el-table-column>
-
       <el-table-column align="center" label="注册时间" width="180">
         <template slot-scope="{row}">
           <span>{{ row.createTime|formatDateTime }}</span>

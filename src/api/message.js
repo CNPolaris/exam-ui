@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 
 export function getAdminMessageList(query) {
   return request({
-    url: '/message/admin/list',
+    url: '/admin/message/admin/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -14,7 +14,7 @@ export function getAdminMessageList(query) {
 
 export function sendMessage(query) {
   return request({
-    url: '/message/send',
+    url: '/admin/message/send',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'

@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 
 export function getQuestionList(page, query) {
   return request({
-    url: '/question/list',
+    url: '/admin/question/list',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ export function getQuestionList(page, query) {
 
 export function selectQuestion(id) {
   return request({
-    url: '/question/select/' + id,
+    url: '/admin/question/select/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -26,7 +26,7 @@ export function selectQuestion(id) {
 
 export function createQuestion(query) {
   return request({
-    url: '/question/create',
+    url: '/admin/question/create',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
@@ -38,7 +38,7 @@ export function createQuestion(query) {
 
 export function updateQuestion(query) {
   return request({
-    url: '/question/update',
+    url: '/admin/question/update',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export function updateQuestion(query) {
 
 export function editQuestion(query) {
   return request({
-    url: '/question/edit',
+    url: '/admin/question/edit',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ export function editQuestion(query) {
 
 export function deleteQuestion(id) {
   return request({
-    url: '/question/delete/' + id,
+    url: '/admin/question/delete/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },

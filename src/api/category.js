@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 
 export function getCategoryList() {
   return request({
-    url: '/category/list',
+    url: '/admin/category/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -13,7 +13,7 @@ export function getCategoryList() {
 
 export function deleteCategory(id) {
   return request({
-    url: '/category/delete/' + id,
+    url: '/admin/category/delete/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -23,7 +23,7 @@ export function deleteCategory(id) {
 
 export function updateCategory(id, data) {
   return request({
-    url: '/category/update/' + id,
+    url: '/admin/category/update/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
@@ -35,7 +35,7 @@ export function updateCategory(id, data) {
 
 export function createCategory(data) {
   return request({
-    url: '/category/create',
+    url: '/admin/category/create',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'

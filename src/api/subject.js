@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 
 export function getSubjectList(query) {
   return request({
-    url: '/subject/list',
+    url: '/admin/subject/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -14,7 +14,7 @@ export function getSubjectList(query) {
 
 export function updateSubjectStatus(id, status) {
   return request({
-    url: '/subject/status/' + id,
+    url: '/admin/subject/status/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -25,7 +25,7 @@ export function updateSubjectStatus(id, status) {
 
 export function createSubject(query) {
   return request({
-    url: '/subject/create',
+    url: '/admin/subject/create',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
@@ -37,7 +37,7 @@ export function createSubject(query) {
 
 export function updateSubject(id, query) {
   return request({
-    url: '/subject/update/' + id,
+    url: '/admin/subject/update/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken(),
       'Content-Type': 'application/json'
@@ -49,7 +49,7 @@ export function updateSubject(id, query) {
 
 export function deleteSubject(id) {
   return request({
-    url: '/subject/delete/' + id,
+    url: '/admin/subject/delete/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -59,7 +59,7 @@ export function deleteSubject(id) {
 
 export function getSubjectName() {
   return request({
-    url: '/subject/name',
+    url: '/admin/subject/name',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -69,7 +69,7 @@ export function getSubjectName() {
 
 export function selectSubject(id) {
   return request({
-    url: '/subject/select/' + id,
+    url: '/admin/subject/select/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -79,7 +79,7 @@ export function selectSubject(id) {
 
 export function allSubjectList() {
   return request({
-    url: '/subject/all',
+    url: '/admin/subject/all',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },

@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 
 export function getClassList(query) {
   return request({
-    url: '/class/list',
+    url: '/admin/class/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -14,7 +14,7 @@ export function getClassList(query) {
 
 export function getStudentList(id) {
   return request({
-    url: '/class/list/student/' + id,
+    url: '/admin/class/list/student/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -24,7 +24,7 @@ export function getStudentList(id) {
 
 export function deleteClass(id) {
   return request({
-    url: '/class/delete/' + id,
+    url: '/admin/class/delete/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -34,7 +34,7 @@ export function deleteClass(id) {
 
 export function updateClass(id, query) {
   return request({
-    url: '/class/update/' + id,
+    url: '/admin/class/update/' + id,
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -45,7 +45,7 @@ export function updateClass(id, query) {
 
 export function editClass(query) {
   return request({
-    url: '/class/edit',
+    url: '/admin/class/edit',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },

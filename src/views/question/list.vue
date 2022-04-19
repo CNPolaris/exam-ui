@@ -109,6 +109,7 @@ export default {
             type: 'success',
             duration: 2000
           })
+          this.getList()
         } else {
           this.$notify({
             title: '失败',

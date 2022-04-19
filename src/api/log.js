@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 
 export function getUserLastLog() {
   return request({
-    url: '/log/login/last',
+    url: '/admin/log/login/last',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },

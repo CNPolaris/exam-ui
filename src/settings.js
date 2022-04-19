@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'exam-ui',
+  title: '在线教考平台管理员端',
 
   /**
    * @type {boolean} true | false

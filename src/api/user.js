@@ -35,7 +35,7 @@ export function logout() {
 
 export function getUserList(page, data) {
   return request({
-    url: '/user/list',
+    url: '/admin/user/list',
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token'),
@@ -48,7 +48,7 @@ export function getUserList(page, data) {
 
 export function selectUser(id) {
   return request({
-    url: '/user/select/' + id,
+    url: '/admin/user/select/' + id,
     method: 'get',
     headers: {
       'Authorization': 'Bearer ' + getToken()
@@ -58,7 +58,7 @@ export function selectUser(id) {
 
 export function deleteUser(id) {
   return request({
-    url: '/user/delete/' + id,
+    url: '/admin/user/delete/' + id,
     method: 'get',
     headers: {
       'Authorization': 'Bearer ' + getToken()
@@ -68,7 +68,7 @@ export function deleteUser(id) {
 
 export function updateUser(query) {
   return request({
-    url: '/user/update',
+    url: '/admin/user/update',
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
@@ -80,7 +80,7 @@ export function updateUser(query) {
 
 export function createUser(data) {
   return request({
-    url: '/user/create',
+    url: '/admin/user/create',
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
@@ -92,7 +92,7 @@ export function createUser(data) {
 
 export function updateUserStatus(id, status) {
   return request({
-    url: '/user/status/' + id,
+    url: '/admin/user/status/' + id,
     method: 'get',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
@@ -104,7 +104,7 @@ export function updateUserStatus(id, status) {
 
 export function getStudentList(data) {
   return request({
-    url: '/user/student/list',
+    url: '/admin/user/student/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -115,7 +115,7 @@ export function getStudentList(data) {
 
 export function getTeacherList(data) {
   return request({
-    url: '/user/teacher/list',
+    url: '/admin/user/teacher/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -126,7 +126,7 @@ export function getTeacherList(data) {
 
 export function getAdminList(data) {
   return request({
-    url: '/user/admin/list',
+    url: '/admin/user/admin/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -137,7 +137,7 @@ export function getAdminList(data) {
 
 export function allocUserRole(data) {
   return request({
-    url: '/user/role',
+    url: '/admin/user/role',
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
@@ -149,7 +149,7 @@ export function allocUserRole(data) {
 
 export function selectByUsername(username) {
   return request({
-    url: '/user/selectByUsername',
+    url: '/admin/user/selectByUsername',
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
@@ -161,7 +161,7 @@ export function selectByUsername(username) {
 
 export function uploadImg(file) {
   return request({
-    url: '/user/uploadAvatar',
+    url: '/admin/user/uploadAvatar',
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
@@ -173,7 +173,7 @@ export function uploadImg(file) {
 
 export function uploadAvatar(url) {
   return request({
-    url: '/user/avatar/save',
+    url: '/admin/user/avatar/save',
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
@@ -185,7 +185,7 @@ export function uploadAvatar(url) {
 
 export function uploadUser(form) {
   return request({
-    url: '/user/upload',
+    url: '/admin/user/upload',
     method: 'post',
     headers: {
       'Authorization': 'Bearer ' + getToken(),

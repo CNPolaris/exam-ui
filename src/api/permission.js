@@ -3,7 +3,7 @@ import Cookies from 'js-cookie'
 
 export function getPermissionList(page, data) {
   return request({
-    url: '/permission/list',
+    url: '/admin/permission/list',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token'),
       'Content-Type': 'application/json'
@@ -16,7 +16,7 @@ export function getPermissionList(page, data) {
 
 export function addPermission(data) {
   return request({
-    url: '/permission/create',
+    url: '/admin/permission/create',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token'),
       'Content-Type': 'application/json'
@@ -28,7 +28,7 @@ export function addPermission(data) {
 
 export function deletePermission(id) {
   return request({
-    url: '/permission/delete/' + id,
+    url: '/admin/permission/delete/' + id,
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token')
     },
@@ -38,7 +38,7 @@ export function deletePermission(id) {
 
 export function updatePermission(data) {
   return request({
-    url: '/permission/update',
+    url: '/admin/permission/update',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token'),
       'Content-Type': 'application/json'
@@ -50,7 +50,7 @@ export function updatePermission(data) {
 
 export function allPermissionList() {
   return request({
-    url: '/permission/all',
+    url: '/admin/permission/all',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token')
     },
@@ -60,7 +60,7 @@ export function allPermissionList() {
 
 export function selectPermissionByRoleId(roleId) {
   return request({
-    url: '/permission/role',
+    url: '/admin/permission/role',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token')
     },
@@ -71,7 +71,7 @@ export function selectPermissionByRoleId(roleId) {
 
 export function selectPermissionByCategory(cateId) {
   return request({
-    url: '/permission/category',
+    url: '/admin/permission/category',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token')
     },
@@ -82,7 +82,7 @@ export function selectPermissionByCategory(cateId) {
 
 export function addRolePermission(data) {
   return request({
-    url: '/rp/create',
+    url: '/admin/rp/create',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token'),
       'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ export function addRolePermission(data) {
 
 export function allocatePermission(data) {
   return request({
-    url: '/permission/allocate',
+    url: '/admin/permission/allocate',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token'),
       'Content-Type': 'application/json'
@@ -106,7 +106,7 @@ export function allocatePermission(data) {
 
 export function updatePermissionStatus(id, status) {
   return request({
-    url: '/permission/status/' + id,
+    url: '/admin/permission/status/' + id,
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token')
     },
@@ -117,7 +117,7 @@ export function updatePermissionStatus(id, status) {
 
 export function deleteRolePermission(id) {
   return request({
-    url: '/rp/delete' + id,
+    url: '/admin/rp/delete' + id,
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token')
     },
@@ -127,7 +127,7 @@ export function deleteRolePermission(id) {
 
 export function getRolePermissionList(param, data) {
   return request({
-    url: '/rp/list',
+    url: '/admin/rp/list',
     headers: {
       'Authorization': 'Bearer ' + Cookies.get('Admin-Token')
     },

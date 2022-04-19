@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 
 export function monitorServer() {
   return request({
-    url: '/monitor/server',
+    url: '/admin/monitor/server',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -13,7 +13,7 @@ export function monitorServer() {
 
 export function loginLog(query) {
   return request({
-    url: '/log/login/list',
+    url: '/admin/log/login/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
@@ -24,7 +24,7 @@ export function loginLog(query) {
 
 export function getUserEventLog(query) {
   return request({
-    url: '/user/event/log/list',
+    url: '/admin/user/event/log/list',
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
