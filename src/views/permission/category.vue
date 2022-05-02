@@ -3,7 +3,7 @@
     <el-card shadow="never" class="operate-container">
       <i class="el-icon-tickets" />
       <span>权限分类</span>
-      <el-button class="btn" size="mini" @click="handleAdd()">添加</el-button>
+      <el-button class="btn" type="primary" size="small" @click="handleAdd()">添加</el-button>
     </el-card>
 
     <div class="table-container">
@@ -49,10 +49,10 @@
         size="small"
       >
         <el-form-item label="名称：">
-          <el-input v-model="permissionCategory.name" style="width: 250px"/>
+          <el-input v-model="permissionCategory.name" style="width: 250px" />
         </el-form-item>
         <el-form-item label="排序：">
-          <el-input v-model="permissionCategory.sort" style="width: 250px"/>
+          <el-input v-model="permissionCategory.sort" style="width: 250px" />
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
@@ -86,6 +86,7 @@ export default {
       list: null,
       listLoading: false,
       dialogVisible: false,
+      isEdit: false,
       permissionCategory: Object.assign({}, defaultPermissionCategory)
     }
   },
@@ -127,7 +128,7 @@ export default {
       })
     },
     handleDialogConfirm() {
-      this.$confirm('是否要确认?', '提示', {
+      this.$confirm('是否确认添加该分类?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -140,6 +141,7 @@ export default {
               type: 'success'
             })
             this.dialogVisible = false
+            this.isEdit = false
             this.getList()
           })
         } else {

@@ -82,7 +82,7 @@
         </el-form-item>
         <el-form-item label="年级" prop="level" label-width="140">
           <el-select v-model="temp.level" placeholder="年级">
-            <el-option v-for="item in levelOptions" :key="item.value" :label="item.label" :value="item.value"/>
+            <el-option v-for="item in levelOptions" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
         </el-form-item>
         <el-form-item label="序号" prop="itemOrder" label-width="140">
@@ -393,12 +393,14 @@ export default {
         type: 'warning'
       }).then(() => {
         updateSubjectStatus(row.id, { status: row.status }).then(response => {
-          this.$notify({
-            title: '失败',
-            message: response.message,
-            type: 'error',
-            duration: 2000
-          })
+          if (response.code === 2000) {
+            this.$notify({
+              title: '失败',
+              message: response.message,
+              type: 'error',
+              duration: 2000
+            })
+          }
         })
       }).catch(() => {
         this.$notify({

@@ -393,6 +393,7 @@ export const asyncRoutes = [
     name: 'answer',
     meta: {
       title: '答卷管理',
+      icon: 'form',
       roles: ['admin', 'teacher']
     },
     children: [

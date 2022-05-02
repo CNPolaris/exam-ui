@@ -3,7 +3,7 @@ import { getToken } from '@/utils/auth'
 
 export function dashInfo() {
   return request({
-    url: '/dash/info',
+    url: '/admin/dash/base/count',
     method: 'get',
     headers: {
       'Authorization': 'Bearer ' + getToken(),
