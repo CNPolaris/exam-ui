@@ -76,7 +76,7 @@ export const constantRoutes = [
         path: 'index',
         component: () => import('@/views/profile/index'),
         name: 'Profile',
-        meta: { title: 'Profile', icon: 'user', noCache: true }
+        meta: { title: '用户详情', icon: 'user', noCache: true }
       }
     ]
   },
@@ -263,6 +263,7 @@ export const asyncRoutes = [
         component: () => import('@/views/class/studentList'),
         name: 'StudentPage',
         meta: {
+          title: '学生列表',
           roles: ['teacher', 'admin']
         },
         hidden: true
