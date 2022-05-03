@@ -11,3 +11,25 @@ export function dashInfo() {
     }
   })
 }
+
+export function getLoginLog() {
+  return request({
+    url: '/admin/dash/log',
+    method: 'get',
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'application/json'
+    }
+  })
+}
+
+export function getQuestionCreateCount() {
+  return request({
+    url: '/admin/dash/question',
+    method: 'get',
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'application/json'
+    }
+  })
+}

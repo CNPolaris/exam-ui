@@ -54,22 +54,40 @@
         </div>
       </el-col>
     </el-row>
+    <el-row style="margin-top: 10px">
+      <el-col :span="12">
+        <div class="chart-wrapper">
+          <user-active-line />
+        </div>
+      </el-col>
+      <el-col :span="12">
+        <div class="chart-wrapper">
+          <question-create-count />
+        </div>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script>
 import CountTo from 'vue-count-to'
 import { dashInfo } from '@/api/dashboard'
+import UserActiveLine from '@/views/dashboard/components/UserActiveLine'
+import QuestionCreateCount from '@/views/dashboard/components/QuestionCreateCount'
 export default {
   name: 'Dashboard',
   components: {
-    CountTo
+    CountTo, UserActiveLine, QuestionCreateCount
   },
   data() {
     return {
       loading: false,
       form: {
         classCount: 0
+      },
+      loginLogData: {
+        date: [],
+        count: []
       }
     }
   },
