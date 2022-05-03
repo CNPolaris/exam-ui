@@ -3,7 +3,7 @@
     <div class="filter-container">
       <el-form :model="filterQuery" :inline="true">
         <el-form-item label="班级名">
-          <el-input v-model="filterQuery.className" placeHolder="班级名称" style="width: 100px;" class="filter-item" @keyup.enter.native="handleFilter"></el-input>
+          <el-input v-model="filterQuery.className" place-holder="班级名称" style="width: 100px;" class="filter-item" @keyup.enter.native="handleFilter" />
         </el-form-item>
         <el-form-item>
           <el-button v-waves class="filter-item" type="primary" icon="el-icon-search" @click="handleFilter">搜索</el-button>
@@ -11,12 +11,12 @@
       </el-form>
     </div>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
-      <el-table-column prop="id" label="Id" width="90px" />
-      <el-table-column prop="className" label="班级名称" width="120px" />
-      <el-table-column prop="classCode" label="班级口令" width="320px" />
-      <el-table-column prop="classCount" label="班级人数" width="100px" />
-      <el-table-column prop="createTime" label="创建时间" width="160px" :formatter="formatDateTime" />
-      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column prop="id" label="序号" width="90px" align="center" />
+      <el-table-column prop="className" label="班级名称" width="400px" align="center" />
+      <el-table-column prop="classCode" label="班级口令" width="478px" align="center" />
+      <el-table-column prop="classCount" label="班级人数" width="100px" align="center" />
+      <el-table-column prop="createTime" label="创建时间" width="300px" align="center" :formatter="formatDateTime" />
+      <el-table-column label="操作" align="center" width="300px" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <el-button type="primary" size="mini" @click="handleDetail(row)">
             详情

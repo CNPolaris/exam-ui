@@ -1,18 +1,22 @@
 <template>
   <div class="app-container">
-    <el-card shadow="never" class="operate-container">
-      <i class="el-icon-tickets" />
-      <span>权限分类</span>
-      <el-button class="btn" type="primary" size="small" @click="handleAdd()">添加</el-button>
-    </el-card>
-
     <div class="table-container">
+      <el-form :inline="true">
+        <el-form-item label="名称">
+          <el-input v-model="queryParam.name" />
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" size="small" @click="getList">查询</el-button>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="success" size="small" @click="handleAdd()">添加</el-button>
+        </el-form-item>
+      </el-form>
       <el-table
         ref="permissionCategoryTable"
         v-loading="listLoading"
         :data="list"
         style="width: 100%"
-        border
       >
         <el-table-column label="编号" width="100" align="center">
           <template slot-scope="scope">{{ scope.row.id }}</template>
@@ -64,7 +68,7 @@
 </template>
 
 <script>
-import { getCategoryList, deleteCategory, updateCategory, createCategory } from '@/api/category'
+import { getCategoryPage, deleteCategory, updateCategory, createCategory } from '@/api/category'
 import { formatDate } from '@/utils/date'
 const defaultPermissionCategory = {
   name: null,
@@ -84,10 +88,16 @@ export default {
   data() {
     return {
       list: null,
+      total: 0,
       listLoading: false,
       dialogVisible: false,
       isEdit: false,
-      permissionCategory: Object.assign({}, defaultPermissionCategory)
+      permissionCategory: Object.assign({}, defaultPermissionCategory),
+      queryParam: {
+        page: 1,
+        limit: 10,
+        name: null
+      }
     }
   },
   created() {
@@ -96,9 +106,10 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      getCategoryList().then(response => {
+      getCategoryPage(this.queryParam).then(response => {
         this.listLoading = false
-        this.list = response.data
+        this.list = response.data.list
+        this.total = response.data.total
       })
     },
     handleAdd() {

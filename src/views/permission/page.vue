@@ -49,19 +49,19 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="名称" width="140">
+      <el-table-column align="center" label="名称" width="200">
         <template slot-scope="{row}">
           <span>{{ row.name }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="资源定位符" width="230">
+      <el-table-column align="center" label="资源定位符" width="350">
         <template slot-scope="{row}">
           <span>{{ row.url }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column width="230" align="center" label="描述">
+      <el-table-column align="center" label="描述" width="378">
         <template slot-scope="{row}">
           <span>{{ row.description }}</span>
         </template>
@@ -80,7 +80,7 @@
       </el-table-column>
       <el-table-column label="是否启用" width="140" align="center">
         <template slot-scope="{row}">
-          <el-switch v-model="row.status" :active-value="1" :inactive-value="0" @change="handleStatusChange($index, row)" />
+          <el-switch v-model="row.status" :active-value="1" :inactive-value="0" @change="handleStatusChange(row)" />
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
@@ -373,7 +373,7 @@ export default {
         }
       })
     },
-    handleStatusChange(index, row) {
+    handleStatusChange(row) {
       this.$confirm('是否要修改该状态?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

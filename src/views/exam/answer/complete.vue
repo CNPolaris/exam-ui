@@ -1,24 +1,26 @@
 <template>
   <div class="app-container">
     <el-table :data="list" border fit highlight-current-row style="width: 100%;">
-      <el-table-column label="编号" prop="id" align="center" width="80" />
-      <el-table-column label="试卷名称" prop="paperName" align="center" width="80" />
-      <el-table-column label="用户名" prop="userName" align="center" width="80" />
-      <el-table-column label="得分" align="center" width="100">
+      <el-table-column label="编号" prop="id" align="center" width="100px" />
+      <el-table-column label="试卷名称" prop="paperName" align="center" width="450px" />
+      <el-table-column label="用户名" prop="userName" align="center" width="200px" />
+      <el-table-column label="得分" align="center" width="170px">
         <template slot-scope="{row}">
           <span>{{ row.userScore }}/{{ row.paperScore }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="题目正确" align="center" width="100">
+      <el-table-column label="题目正确" align="center" width="170px">
         <template slot-scope="{row}">
           <span>{{ row.questionCorrect }}/{{ row.questionCount }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="耗时" prop="doTime" align="center" width="100" />
-      <el-table-column label="提交时间" prop="createTime" align="center" width="160" :formatter="formatDateTime" />
-      <el-table-column label="操作" align="center" width="85">
+      <el-table-column label="耗时" prop="doTime" align="center" width="170px" />
+      <el-table-column label="提交时间" prop="createTime" align="center" width="250px" :formatter="formatDateTime" />
+      <el-table-column label="操作" align="center" width="158px">
         <template slot-scope="{row}">
-          <el-button size="mini" >查看</el-button>
+          <router-link target="_blank" :to="{path: '/exam/answer/read', query: {id:row.id}}">
+            <el-button size="mini">查看</el-button>
+          </router-link>
         </template>
       </el-table-column>
     </el-table>

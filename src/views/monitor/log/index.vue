@@ -25,7 +25,7 @@
       <el-table-column label="浏览器" prop="browser" align="center" width="251" />
       <el-table-column label="登录时间" prop="loginTime" :formatter="formatDateTime" align="center" width="518" />
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: center" @pagination="getList" />
   </div>
 </template>
 

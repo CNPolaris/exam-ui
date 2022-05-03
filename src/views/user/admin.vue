@@ -98,7 +98,7 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" style="text-align: center" @pagination="getList" />
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
@@ -154,7 +154,7 @@
           </span>
         </el-form-item>
         <el-form-item label="头像" label-width="140px">
-          <el-image style="width: 60px; height: 60px" :src="temp.imagePath"/>
+          <el-image style="width: 60px; height: 60px" :src="temp.avatar" />
         </el-form-item>
         <el-form-item label="角色" label-width="140px">
           <span>

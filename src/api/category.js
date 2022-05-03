@@ -11,6 +11,18 @@ export function getCategoryList() {
   })
 }
 
+export function getCategoryPage(data) {
+  return request({
+    url: '/admin/category/page',
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'application/json'
+    },
+    method: 'post',
+    data: data
+  })
+}
+
 export function deleteCategory(id) {
   return request({
     url: '/admin/category/delete/' + id,

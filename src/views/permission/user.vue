@@ -47,21 +47,15 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="性别" width="140">
+      <el-table-column align="center" label="性别" width="80">
         <template slot-scope="{row}">
           <span>{{ row.sex|formatSex }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="电话" width="140">
+      <el-table-column align="center" label="电话" width="200">
         <template slot-scope="{row}">
           <span>{{ row.phone }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column align="center" label="年级" width="140">
-        <template slot-scope="{row}">
-          <span>{{ row.userLevel }}</span>
         </template>
       </el-table-column>
 
@@ -89,18 +83,18 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="是否启用" width="140" align="center">
+      <el-table-column label="是否启用" width="100" align="center">
         <template slot-scope="{row}">
-          <el-switch v-model="row.status" :active-value="1" :inactive-value="0" @change="handleStatusChange($index, row)" />
+          <el-switch v-model="row.status" :active-value="1" :inactive-value="0" @change="handleStatusChange(row)" />
         </template>
       </el-table-column>
 
       <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
-          <el-button type="primary" size="mini" @click="handleDetail(row)">
+          <el-button type="primary" size="small" @click="handleDetail(row)">
             详情
           </el-button>
-          <el-button type="primary" size="mini" @click="handleUpdate(row)">
+          <el-button type="primary" size="small" @click="handleUpdate(row)">
             编辑
           </el-button>
           <el-popconfirm
@@ -110,13 +104,13 @@
             title="是否确定要删除该项数据"
             @onConfirm="handleDelete(row, $index)"
           >
-            <el-button slot="reference" size="mini" type="danger">删除</el-button>
+            <el-button slot="reference" size="small" type="danger">删除</el-button>
           </el-popconfirm>
         </template>
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="pageQuery.page" :limit.sync="pageQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="pageQuery.page" :limit.sync="pageQuery.limit" style="text-align: center" @pagination="getList" />
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
@@ -175,7 +169,7 @@
           </span>
         </el-form-item>
         <el-form-item label="头像" label-width="140px">
-          <el-image style="width: 60px; height: 60px" :src="temp.imagePath"/>
+          <el-image style="width: 60px; height: 60px" :src="temp.avatar" />
         </el-form-item>
         <el-form-item label="角色" label-width="140px">
           <span>
@@ -488,7 +482,7 @@ export default {
         }
       })
     },
-    handleStatusChange(index, row) {
+    handleStatusChange(row) {
       this.$confirm('是否要修改该状态?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

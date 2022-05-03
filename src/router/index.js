@@ -84,6 +84,14 @@ export const constantRoutes = [
     path: '/profile/timeline',
     component: () => import('@/views/profile/components/Timeline'),
     hidden: true
+  },
+  {
+    path: '/exam/answer/read',
+    component: () => import('@/views/exam/answer/read'),
+    meta: {
+      title: '答卷详情'
+    },
+    hidden: true
   }
 ]
 
@@ -96,6 +104,7 @@ export const asyncRoutes = [
     path: '/',
     component: Layout,
     meta: {
+      title: '首页',
       icon: 'dashboard',
       roles: ['admin'] // you can set roles in root nav
     },
@@ -252,7 +261,7 @@ export const asyncRoutes = [
       {
         path: '/class/student',
         component: () => import('@/views/class/studentList'),
-        name: 'StudentList',
+        name: 'StudentPage',
         meta: {
           roles: ['teacher', 'admin']
         },

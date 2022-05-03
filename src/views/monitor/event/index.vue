@@ -25,7 +25,7 @@
       <el-table-column label="内容" prop="content" align="center" width="380" />
       <el-table-column label="创建时间" prop="createTime" :formatter="formatDateTime" align="center" width="540" />
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: center" @pagination="getList" />
   </div>
 </template>
 

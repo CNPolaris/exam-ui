@@ -80,7 +80,7 @@
 
       <el-table-column label="是否启用" width="140" align="center">
         <template slot-scope="{row}">
-          <el-switch v-model="row.status" :active-value="1" :inactive-value="0" @change="handleStatusChange($index, row)" />
+          <el-switch v-model="row.status" :active-value="1" :inactive-value="0" @change="handleStatusChange(row)" />
         </template>
       </el-table-column>
 
@@ -105,7 +105,7 @@
       </el-table-column>
     </el-table>
 
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" style="text-align: center" @pagination="getList" />
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
@@ -454,7 +454,7 @@ export default {
         }
       })
     },
-    handleStatusChange(index, row) {
+    handleStatusChange(row) {
       this.$confirm('是否要修改该状态?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',

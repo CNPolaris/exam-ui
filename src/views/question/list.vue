@@ -10,13 +10,13 @@
       <el-table-column prop="createTime" label="创建时间" :formatter="formatDateTime" width="160px" />
       <el-table-column label="操作" align="center" width="220px">
         <template slot-scope="{row}">
-<!--              <el-button size="mini"   @click="showQuestion(row)">预览</el-button>-->
+          <!--              <el-button size="mini"   @click="showQuestion(row)">预览</el-button>-->
           <el-button size="mini" @click="editQuestion(row)">编辑</el-button>
           <el-button size="mini" type="danger" class="link-left" @click="handleDeleteQuestion(row.id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="pageQuery.page" :limit.sync="pageQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="pageQuery.page" :limit.sync="pageQuery.limit" style="text-align: center" @pagination="getList" />
     <el-dialog :visible.sync="questionShow.dialog" style="width: 100%;height: 100%">
       <QuestionShow :q-type="questionShow.qType" :question="questionShow.question" :q-loading="questionShow.loading" />
     </el-dialog>
@@ -65,7 +65,16 @@ export default {
       questionTypeEnum: [{ key: 1, value: '单选题' }, { key: 2, value: '多选题' }, { key: 3, value: '判断题' }, { key: 4, value: '填空题' }, { key: 5, value: '简答题' }]
     }
   },
-
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      questionType: state => state.exam.question.typeEnum,
+      editUrlEnum: state => state.exam.question.editUrlEnum,
+      levelEnum: state => state.user.levelEnum
+    }),
+    ...mapGetters('exam', ['subjectEnumFormat']),
+    ...mapState('exam', { subjects: state => state.subjects })
+  },
   created() {
     this.getList()
     this.initSubject()
@@ -134,16 +143,6 @@ export default {
       return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
     },
     ...mapActions('exam', { initSubject: 'initSubject' })
-  },
-  computed: {
-    ...mapGetters('enumItem', ['enumFormat']),
-    ...mapState('enumItem', {
-      questionType: state => state.exam.question.typeEnum,
-      editUrlEnum: state => state.exam.question.editUrlEnum,
-      levelEnum: state => state.user.levelEnum
-    }),
-    ...mapGetters('exam', ['subjectEnumFormat']),
-    ...mapState('exam', { subjects: state => state.subjects })
   }
 }
 </script>
