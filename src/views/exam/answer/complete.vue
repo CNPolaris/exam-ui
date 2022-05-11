@@ -1,5 +1,12 @@
 <template>
   <div class="app-container">
+    <el-form :inline="true">
+      <el-form-item label="学科">
+        <el-select v-model="query.subjectId" style="width: 100px" @change="getList">
+          <el-option v-for="item in subjects" :key="item.id" :value="item.id" :label="item.name" />
+        </el-select>
+      </el-form-item>
+    </el-form>
     <el-table :data="list" border fit highlight-current-row style="width: 100%;">
       <el-table-column label="编号" prop="id" align="center" width="100px" />
       <el-table-column label="试卷名称" prop="paperName" align="center" width="450px" />
@@ -33,6 +40,8 @@ import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
 import { formatDate } from '@/utils/date'
 import { paperAnswerList } from '@/api/exam'
+const { mapGetters, mapState } = require('vuex')
+
 export default {
   name: 'Complete',
   components: { Pagination },
@@ -52,6 +61,11 @@ export default {
       },
       listLoading: false
     }
+  },
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapGetters('exam', ['subjectEnumFormat']),
+    ...mapState('exam', { subjects: state => state.subjects })
   },
   created() {
     this.getList()

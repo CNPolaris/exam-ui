@@ -1,5 +1,26 @@
 <template>
   <div class="app-container">
+    <el-form :inline="true">
+      <el-form-item label="年级">
+        <el-select v-model="queryParam.gradeLevel" placeholder="年级">
+          <el-option v-for="item in levelEnum" :key="item.key" :value="item.key" :label="item.value" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="学科">
+        <el-select v-model="queryParam.subjectId" placeholder="学科">
+          <el-option v-for="item in subjects" :key="item.id" :value="item.id" :label="item.name" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="题目类型">
+        <el-select v-model="queryParam.questionType" placeholder="题目类型">
+          <el-option v-for="item in questionTypeEnum" :key="item.key" :value="item.key" :label="item.value" />
+        </el-select>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" size="small" @click="getList">查询</el-button>
+        <el-button type="success" size="small" @click="handleClear">重置</el-button>
+      </el-form-item>
+    </el-form>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column prop="id" label="Id" width="90px" />
       <el-table-column prop="subjectId" label="学科" :formatter="subjectFormatter" width="120px" />
@@ -11,7 +32,7 @@
       <el-table-column label="操作" align="center" width="220px">
         <template slot-scope="{row}">
           <!--              <el-button size="mini"   @click="showQuestion(row)">预览</el-button>-->
-          <el-button size="mini" @click="editQuestion(row)">编辑</el-button>
+          <el-button type="primary" size="mini" @click="editQuestion(row)">编辑</el-button>
           <el-button size="mini" type="danger" class="link-left" @click="handleDeleteQuestion(row.id)">删除</el-button>
         </template>
       </el-table-column>
@@ -29,7 +50,6 @@ import waves from '@/directive/waves'
 import { formatDate } from '@/utils/date'
 import { getQuestionList, selectQuestion, deleteQuestion } from '@/api/question'
 import QuestionShow from './components/Show'
-
 const { mapActions, mapGetters, mapState } = require('vuex')
 
 export default {
@@ -49,10 +69,8 @@ export default {
       queryParam: {
         id: null,
         questionType: null,
-        level: null,
-        subjectId: null,
-        pageIndex: 1,
-        pageSize: 10
+        gradeLevel: null,
+        subjectId: null
       },
       questionShow: {
         qType: 0,
@@ -82,7 +100,7 @@ export default {
   methods: {
     getList() {
       this.listLoading = true
-      getQuestionList(this.pageQuery, this.keyQuery).then(response => {
+      getQuestionList(this.pageQuery, this.queryParam).then(response => {
         const { data } = response
         this.list = data.data
         this.total = data.total
@@ -128,6 +146,9 @@ export default {
           })
         }
       })
+    },
+    handleClear() {
+      Object.assign(this.queryParam, {})
     },
     questionTypeFormatter(row, column, cellValue, index) {
       return this.enumFormat(this.questionType, cellValue)

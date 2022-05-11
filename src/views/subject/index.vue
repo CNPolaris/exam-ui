@@ -395,9 +395,9 @@ export default {
         updateSubjectStatus(row.id, { status: row.status }).then(response => {
           if (response.code === 2000) {
             this.$notify({
-              title: '失败',
+              title: '成功',
               message: response.message,
-              type: 'error',
+              type: 'success',
               duration: 2000
             })
           }

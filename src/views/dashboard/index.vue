@@ -1,6 +1,6 @@
 <template>
-  <div class="app-container">
-    <el-row :gutter="40" class="panel-group">
+  <div class="dashboard-container">
+    <el-row :gutter="20" class="panel-group">
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
         <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-people">
@@ -54,13 +54,13 @@
         </div>
       </el-col>
     </el-row>
-    <el-row style="margin-top: 10px">
-      <el-col :span="12">
+    <el-row :gutter="20" style="margin-top: 10px">
+      <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
           <user-active-line />
         </div>
       </el-col>
-      <el-col :span="12">
+      <el-col :xs="24" :sm="24" :lg="12">
         <div class="chart-wrapper">
           <question-create-count />
         </div>

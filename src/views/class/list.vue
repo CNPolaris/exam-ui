@@ -12,13 +12,14 @@
     </div>
     <el-table v-loading="listLoading" :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column prop="id" label="序号" width="90px" align="center" />
-      <el-table-column prop="className" label="班级名称" width="400px" align="center" />
-      <el-table-column prop="classCode" label="班级口令" width="478px" align="center" />
+      <el-table-column prop="className" label="班级名称" width="300px" align="center" />
+      <el-table-column prop="classCode" label="班级口令" width="425px" align="center" />
+      <el-table-column prop="level" label="年级" width="150px" align="center" :formatter="levelFormatter" />
       <el-table-column prop="classCount" label="班级人数" width="100px" align="center" />
       <el-table-column prop="createTime" label="创建时间" width="300px" align="center" :formatter="formatDateTime" />
       <el-table-column label="操作" align="center" width="300px" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
-          <el-button type="primary" size="mini" @click="handleDetail(row)">
+          <el-button type="success" size="mini" @click="handleDetail(row)">
             详情
           </el-button>
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
@@ -35,9 +36,8 @@
           </el-popconfirm>
         </template>
       </el-table-column>
-
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="query.page" :limit.sync="query.limit" style="text-align: center" @pagination="getList" />
 
     <el-dialog :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
@@ -47,6 +47,11 @@
         <el-form-item label="班级名称" prop="className" label-width="140">
           <el-input v-model="temp.className" />
         </el-form-item>
+        <el-table-column label="年级" prop="level" label-width="140">
+          <el-select v-model="temp.level">
+            <el-option v-for="item in levelEnum" :key="item.key" :value="item.key" :label="item.value" />
+          </el-select>
+        </el-table-column>
         <el-form-item label="班级人数" prop="classCount" label-width="140">
           <a>{{ temp.classCount }}</a>
         </el-form-item>
@@ -75,6 +80,7 @@
 </template>
 
 <script>
+import { mapGetters, mapState } from 'vuex'
 import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
 import { getClassList, deleteClass, editClass, getStudentList } from '@/api/classes'
@@ -105,6 +111,12 @@ export default {
       dialogFormVisible: false,
       detailDialogVisible: false
     }
+  },
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      levelEnum: state => state.user.levelEnum
+    })
   },
   created() {
     this.getList()
@@ -196,12 +208,10 @@ export default {
         case 0:
           return '女'
       }
+    },
+    levelFormatter(row, column, cellValue, index) {
+      return this.enumFormat(this.levelEnum, cellValue)
     }
   }
-
 }
 </script>
-
-<style scoped>
-
-</style>
