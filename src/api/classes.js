@@ -22,6 +22,17 @@ export function getStudentList(id) {
   })
 }
 
+export function getStudentPage(id, data) {
+  return request({
+    url: '/teacher/class/student/' + id,
+    headers: {
+      'Authorization': 'Bearer ' + getToken()
+    },
+    method: 'post',
+    data: data
+  })
+}
+
 export function deleteClass(id) {
   return request({
     url: '/admin/class/delete/' + id,

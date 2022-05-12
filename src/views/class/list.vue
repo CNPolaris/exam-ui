@@ -19,7 +19,7 @@
       <el-table-column prop="createTime" label="创建时间" width="300px" align="center" :formatter="formatDateTime" />
       <el-table-column label="操作" align="center" width="300px" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
-          <el-button type="success" size="mini" @click="handleDetail(row)">
+          <el-button type="success" size="mini" @click="$router.push({ path: '/class/student', query: { id: row.id}})">
             详情
           </el-button>
           <el-button type="primary" size="mini" @click="handleUpdate(row)">
@@ -191,7 +191,7 @@ export default {
     handleDetail(row, index) {
       getStudentList(row.id).then(re => {
         this.studentList = re.data
-        this.$router.push({ path: '/class/student', query: { list: this.studentList }})
+        this.$router.push({ path: '/class/student', params: { list: this.studentList }})
       })
     },
     formatDateTime(row, column, cellValue, index) {
