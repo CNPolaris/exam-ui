@@ -7,8 +7,8 @@ export function getAdminMessageList(query) {
     headers: {
       'Authorization': 'Bearer ' + getToken()
     },
-    method: 'get',
-    params: query
+    method: 'post',
+    data: query
   })
 }
 

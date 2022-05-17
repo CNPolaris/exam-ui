@@ -17,7 +17,7 @@
       <el-table-column prop="receives" label="接收人" show-overflow-tooltip />
       <el-table-column prop="readCount" label="已读数" width="70" />
       <el-table-column prop="receiveUserCount" label="接收人数" width="100" />
-      <el-table-column prop="createTime" label="创建时间" width="160px" />
+      <el-table-column prop="createTime" label="创建时间" width="160px" :formatter="formatDateTime" />
     </el-table>
     <pagination
       v-show="total>0"
@@ -34,6 +34,7 @@
 import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
 import { getAdminMessageList } from '@/api/message'
+import { formatDate } from '@/utils/date'
 
 export default {
   components: { Pagination },
@@ -47,7 +48,7 @@ export default {
       queryParam: {
         page: 1,
         limit: 10,
-        send: ''
+        sendUserName: ''
       }
     }
   },
@@ -67,6 +68,13 @@ export default {
     submitForm() {
       this.queryParam.pageIndex = 1
       this.search()
+    },
+    formatDateTime(row, column, cellValue, index) {
+      if (row.createTime === null || row.createTime === '') {
+        return 'N/A'
+      }
+      const date = new Date(row.createTime)
+      return formatDate(date, 'yyyy-MM-dd hh:mm:ss')
     }
   }
 }

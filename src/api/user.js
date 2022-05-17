@@ -102,6 +102,18 @@ export function updateUserStatus(id, status) {
   })
 }
 
+export function updateUserPassword(id, data) {
+  return request({
+    url: '/admin/user/password/' + id,
+    method: 'post',
+    headers: {
+      'Authorization': 'Bearer ' + getToken(),
+      'Content-Type': 'application/json'
+    },
+    data: data
+  })
+}
+
 export function getStudentList(data) {
   return request({
     url: '/admin/user/student/list',

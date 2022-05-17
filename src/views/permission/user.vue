@@ -71,11 +71,11 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="更新时间" width="180">
-        <template slot-scope="{row}">
-          <span>{{ row.modifyTime|formatDateTime }}</span>
-        </template>
-      </el-table-column>
+      <!--      <el-table-column align="center" label="更新时间" width="180">-->
+      <!--        <template slot-scope="{row}">-->
+      <!--          <span>{{ row.modifyTime|formatDateTime }}</span>-->
+      <!--        </template>-->
+      <!--      </el-table-column>-->
 
       <el-table-column align="center" label="最后一次登录时间" width="180">
         <template slot-scope="{row}">
@@ -89,7 +89,7 @@
         </template>
       </el-table-column>
 
-      <el-table-column label="操作" align="center" width="230" class-name="small-padding fixed-width">
+      <el-table-column label="操作" align="center" width="410" class-name="small-padding fixed-width">
         <template slot-scope="{row,$index}">
           <el-button type="primary" size="small" @click="handleDetail(row)">
             详情
@@ -97,6 +97,7 @@
           <el-button type="primary" size="small" @click="handleUpdate(row)">
             编辑
           </el-button>
+          <el-button type="success" size="small" @click="handleUpdatePassword(row.id)">修改密码</el-button>
           <el-popconfirm
             v-model="visible"
             placement="top"
@@ -213,11 +214,24 @@
         </el-form-item>
       </el-form>
     </el-dialog>
+
+    <el-dialog :title="'修改密码'" :visible.sync="passwordEditVisible">
+      <el-form :model="temp" :inline="true" label-position="left" style="width: 400px; margin-left:50px;">
+        <el-form-item label="密码(不低于六位)">
+          <el-input v-model="temp.password" placeholder="请输入新密码" style="width: 200px" />
+        </el-form-item>
+        <el-form-item>
+          <el-button @click="updatePassword">确认</el-button>
+          <el-button @click="passwordEditVisible = false">取消</el-button>
+        </el-form-item>
+
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
 <script>
-import { getUserList, deleteUser, updateUser, createUser, updateUserStatus } from '@/api/user'
+import { getUserList, deleteUser, updateUser, createUser, updateUserStatus, updateUserPassword } from '@/api/user'
 import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
 import { formatDate } from '@/utils/date'
@@ -325,11 +339,14 @@ export default {
         sex: undefined,
         userLevel: undefined,
         phone: undefined,
-        roleId: undefined
+        roleId: undefined,
+        password: null,
+        id: null
       },
       visible: false,
       dialogFormVisible: false,
       dialogStatus: '',
+      passwordEditVisible: false,
       userDetailDialogVisible: false,
       textMap: {
         update: 'Edit',
@@ -481,6 +498,33 @@ export default {
           this.getList()
         }
       })
+    },
+    handleUpdatePassword(id) {
+      this.passwordEditVisible = true
+      this.temp.id = id
+    },
+    updatePassword() {
+      if (this.temp.password !== null && this.temp.password.length >= 6) {
+        updateUserPassword(this.temp.id, this.temp).then(re => {
+          if (re.code === 2000) {
+            this.passwordEditVisible = false
+            this.$notify({
+              type: 'success',
+              message: '修改成功!'
+            })
+          } else {
+            this.$notify({
+              type: 'error',
+              message: re.message
+            })
+          }
+        })
+      } else {
+        this.$notify({
+          type: 'error',
+          message: '新密码不足六位！'
+        })
+      }
     },
     handleStatusChange(row) {
       this.$confirm('是否要修改该状态?', '提示', {
