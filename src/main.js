@@ -18,7 +18,7 @@ import './permission' // permission control
 import './utils/error-log' // error log
 import Print from '@/utils/print' // 页面打印
 import * as filters from './filters' // global filters
-
+import 'default-passive-events'
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
