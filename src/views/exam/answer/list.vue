@@ -51,7 +51,8 @@ export default {
       query: {
         page: 1,
         limit: 15,
-        subjectId: ''
+        subjectId: '',
+        status: 0
       },
       keyQuery: {
         subjectId: null,

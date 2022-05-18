@@ -92,6 +92,24 @@ export const constantRoutes = [
       title: '答卷详情'
     },
     hidden: true
+  },
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: 'Dashboard',
+        meta: {
+          title: '首页',
+          icon: 'dashboard',
+          affix: true,
+          roles: ['admin']
+        }
+      }
+    ]
   }
 ]
 
@@ -100,28 +118,6 @@ export const constantRoutes = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-  {
-    path: '/',
-    component: Layout,
-    meta: {
-      title: '首页',
-      icon: 'dashboard',
-      roles: ['admin'] // you can set roles in root nav
-    },
-    redirect: '/dashboard/admin',
-    children: [
-      {
-        path: '/dashboard/admin',
-        component: () => import('@/views/dashboard/index'),
-        name: 'AdminDash',
-        meta: {
-          title: '首页',
-          affix: true,
-          roles: ['admin']
-        }
-      }
-    ]
-  },
   {
     path: '/permission',
     component: Layout,
