@@ -32,7 +32,7 @@
 
       <el-table-column prop="name" align="center" label="名称" width="267" />
 
-      <el-table-column prop="level" :formatter="levelFormatter" align="center" label="年级" width="353" />
+      <el-table-column prop="gradeLevel" :formatter="levelFormatter" align="center" label="年级" width="353" />
 
       <el-table-column prop="subjectId" :formatter="subjectFormatter" align="center" label="学科" width="353" />
 
@@ -48,7 +48,7 @@
           <!--            编辑-->
           <!--          </el-button>-->
           <el-button size="mini" @click="$router.push({ path:'/exam/detail', query:{ id:row.id}})">查看</el-button>
-          <el-button size="mini" @click="$router.push({ path:'/exam/edit', query:{ id:row.id, isUpdate: 1 }})">编辑</el-button>
+          <el-button size="mini" @click="$router.push({ path:'/exam/edit', query:{ id:row.id }})">编辑</el-button>
           <el-popconfirm
             v-model="visible"
             placement="top"

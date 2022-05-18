@@ -25,7 +25,7 @@
           </el-form-item>
         </el-form>
         <div align="center">
-          <el-button type="primary">打印</el-button>
+          <el-button type="primary" @click="handlePrint">打印</el-button>
           <el-button type="danger" @click="$router.push('/exam/list')">取消</el-button>
         </div>
       </main>
@@ -36,6 +36,7 @@
 <script>
 import { selectExamPaper } from '@/api/exam'
 import QuestionShow from '../../question/components/Show'
+import { mapActions, mapGetters, mapState } from 'vuex'
 
 export default {
   components: { QuestionShow },
@@ -86,6 +87,15 @@ export default {
       subjectFilter: null
     }
   },
+  computed: {
+    ...mapGetters('enumItem', ['enumFormat']),
+    ...mapState('enumItem', {
+      questionTypeEnum: state => state.exam.question.typeEnum,
+      paperTypeEnum: state => state.exam.examPaper.paperTypeEnum,
+      levelEnum: state => state.user.levelEnum
+    }),
+    ...mapState('exam', { subjects: state => state.subjects })
+  },
   created() {
     const id = this.$route.query.id
     const _this = this
@@ -97,6 +107,12 @@ export default {
         _this.form = re.data
       })
     }
+  },
+  methods: {
+    handlePrint() {
+      this.$print(this.$refs.form)
+    },
+    ...mapActions('exam', { initSubject: 'initSubject' })
   }
 }
 </script>
