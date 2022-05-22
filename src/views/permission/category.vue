@@ -31,8 +31,11 @@
           <template slot-scope="scope">{{ scope.row.sort }}</template>
         </el-table-column>
 
-        <el-table-column label="操作" width="140" align="center">
+        <el-table-column label="操作" width="200" align="center">
           <template slot-scope="scope">
+            <el-button type="text" size="mini" @click="handlePermission(scope.row.id)">
+              查看详情
+            </el-button>
             <el-button size="mini" type="text" @click="handleUpdate(scope.$index, scope.row)">编辑
             </el-button>
             <el-button size="mini" type="text" @click="handleDelete(scope.$index, scope.row)">删除
@@ -40,6 +43,7 @@
           </template>
         </el-table-column>
       </el-table>
+      <pagination v-show="total>0" :total="total" :page.sync="queryParam.page" :limit.sync="queryParam.limit" style="text-align: center" @pagination="getList" />
     </div>
     <el-dialog
       title="添加分类"
@@ -64,18 +68,37 @@
         <el-button type="primary" size="small" @click="handleDialogConfirm()">确 定</el-button>
       </span>
     </el-dialog>
+    <el-dialog
+      title="已分配权限"
+      :visible.sync="permissionVisible"
+    >
+      <el-table :data="permissionList" border fit highlight-current-row style="width: 100%;">
+        <el-table-column prop="id" label="id" />
+        <el-table-column prop="url" label="资源定位符" />
+        <el-table-column prop="description" label="描述" />
+        <el-table-column label="创建时间">
+          <template slot-scope="{row}">
+            <span>{{ row.createTime|formatDateTime }}</span>
+          </template>
+        </el-table-column>
+      </el-table>
+      <pagination v-show="permissionTotal>0" :total="permissionTotal" :page.sync="permissionPage.page" :limit.sync="permissionPage.limit" style="text-align: center" @pagination="handlePermission" />
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { getCategoryPage, deleteCategory, updateCategory, createCategory } from '@/api/category'
+import { getPermissionList } from '@/api/permission'
 import { formatDate } from '@/utils/date'
+import Pagination from '@/components/Pagination'
 const defaultPermissionCategory = {
   name: null,
   sort: 0
 }
 export default {
   name: 'Category',
+  components: { Pagination },
   filters: {
     formatDateTime(time) {
       if (time == null || time === '') {
@@ -91,12 +114,22 @@ export default {
       total: 0,
       listLoading: false,
       dialogVisible: false,
+      permissionVisible: false,
       isEdit: false,
       permissionCategory: Object.assign({}, defaultPermissionCategory),
       queryParam: {
         page: 1,
         limit: 10,
         name: null
+      },
+      permissionPage: {
+        page: 1,
+        limit: 10
+      },
+      permissionTotal: 0,
+      permissionList: [],
+      permissionQuery: {
+        categoryId: undefined
       }
     }
   },
@@ -110,6 +143,14 @@ export default {
         this.listLoading = false
         this.list = response.data.list
         this.total = response.data.total
+      })
+    },
+    handlePermission(id) {
+      this.permissionQuery.categoryId = id
+      getPermissionList(this.permissionPage, this.permissionQuery).then(re => {
+        this.permissionVisible = true
+        this.permissionTotal = re.data.total
+        this.permissionList = re.data.data
       })
     },
     handleAdd() {

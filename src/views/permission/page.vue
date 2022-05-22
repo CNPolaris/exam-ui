@@ -48,7 +48,7 @@
           <span>{{ row.id }}</span>
         </template>
       </el-table-column>
-
+      <el-table-column prop="categoryName" align="center" label="类别" width="178" />
       <el-table-column align="center" label="名称" width="200">
         <template slot-scope="{row}">
           <span>{{ row.name }}</span>
@@ -60,8 +60,7 @@
           <span>{{ row.url }}</span>
         </template>
       </el-table-column>
-
-      <el-table-column align="center" label="描述" width="378">
+      <el-table-column align="center" label="描述" width="300">
         <template slot-scope="{row}">
           <span>{{ row.description }}</span>
         </template>
@@ -73,11 +72,11 @@
         </template>
       </el-table-column>
 
-      <el-table-column align="center" label="有效状态" width="100">
-        <template slot-scope="{row}">
-          <span>{{ row.status|statusFormat }}</span>
-        </template>
-      </el-table-column>
+      <!--      <el-table-column align="center" label="有效状态" width="100">-->
+      <!--        <template slot-scope="{row}">-->
+      <!--          <span>{{ row.status|statusFormat }}</span>-->
+      <!--        </template>-->
+      <!--      </el-table-column>-->
       <el-table-column label="是否启用" width="140" align="center">
         <template slot-scope="{row}">
           <el-switch v-model="row.status" :active-value="1" :inactive-value="0" @change="handleStatusChange(row)" />
@@ -100,7 +99,7 @@
         </template>
       </el-table-column>
     </el-table>
-    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
+    <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" style="text-align: center" @pagination="getList" />
 
     <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
       <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
@@ -109,6 +108,11 @@
         </el-form-item>
         <el-form-item label="资源定位符" prop="url" label-width="140">
           <el-input v-model="temp.url" />
+        </el-form-item>
+        <el-form-item label="权限类别" prop="categoryName">
+          <el-select v-model="temp.categoryId">
+            <el-option v-for="item in categoryList" :key="item.id" :value="item.id" :label="item.name" />
+          </el-select>
         </el-form-item>
         <el-form-item label="描述" prop="description" label-width="140">
           <el-input v-model="temp.description" />
@@ -146,6 +150,7 @@
 
 <script>
 import { getPermissionList, deletePermission, addPermission, updatePermission, updatePermissionStatus } from '@/api/permission'
+import { getCategoryList } from '@/api/category'
 import { formatDate } from '@/utils/date'
 import Pagination from '@/components/Pagination'
 import waves from '@/directive/waves'
@@ -196,8 +201,10 @@ export default {
       temp: {
         name: undefined,
         url: undefined,
-        description: undefined
+        description: undefined,
+        categoryId: undefined
       },
+      categoryList: [],
       visible: false,
       dialogFormVisible: false,
       dialogStatus: '',
@@ -304,6 +311,9 @@ export default {
       this.resetTemp()
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
+      getCategoryList().then(re => {
+        this.categoryList = re.data
+      })
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
@@ -340,6 +350,9 @@ export default {
       this.temp = Object.assign({}, row) // copy obj
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
+      getCategoryList().then(re => {
+        this.categoryList = re.data
+      })
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
@@ -361,6 +374,7 @@ export default {
                 type: 'success',
                 duration: 2000
               })
+              this.getList()
             } else {
               this.$notify({
                 title: 'UnSuccess',
